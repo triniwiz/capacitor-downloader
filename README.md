@@ -13,11 +13,11 @@
 ```ts
 import { Downloader } from 'capacitor-downloader';
 const downloader = new Downloader();
-const imageDownloaderId = downloadManager.createDownload({
+const data = await downloadManager.createDownload({
   url:
     'https://wallpaperscraft.com/image/hulk_wolverine_x_men_marvel_comics_art_99032_3840x2400.jpg'
 });
-
+const imageDownloaderId = data.value;
 downloader
   .start({id:imageDownloaderId}, (progressData: ProgressEventData) => {
     console.log(`Progress : ${progressData.value}%`);
