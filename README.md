@@ -37,13 +37,13 @@ downloader
 
 | Method                                   | Default | Type                         | Description                                           |
 | ---------------------------------------- | ------- | ---------------------------- | ----------------------------------------------------- |
-| createDownload(options: DownloadOptions) |         | `Promise<string>`                     | Creates a download task it returns the id of the task |
-| getStatus({id: string})                    |         | `Promise<StatusCode>`                 | Gets the status of a download task.                   |
-| start({id: string}, progress?: Function)   |         | `Promise<DownloadEventData>` | Starts a download task.                               |  |
-| resume({id: string})                       |         | `Promise<void>`                       | Resumes a download task.                              |
-| cancel({id: string})                       |         | `Promise<void>`                       | Cancels a download task.                              |
-| pause({id: string})                        |         | `Promise<void>`                       | Pauses a download task.                               |
-| getPath({id: string})                      |         | `Promise<void>`                       | Return the path of a download task.                   |
+| createDownload(options: DownloadOptions) |         | `Promise<Options>`                     | Creates a download task it returns the id of the task |
+| getStatus(options:Options)                    |         | `Promise<StatusCode>`                 | Gets the status of a download task.                   |
+| start(options:Options, progress?: Function)   |         | `Promise<DownloadEventData>` | Starts a download task.                               |  |
+| resume(options:Options)                       |         | `Promise<void>`                       | Resumes a download task.                              |
+| cancel(options:Options)                       |         | `Promise<void>`                       | Cancels a download task.                              |
+| pause(options:Options)                        |         | `Promise<void>`                       | Pauses a download task.                               |
+| getPath(options:Options)                      |         | `Promise<void>`                       | Return the path of a download task.                   |
 
 ## Example Image
 
