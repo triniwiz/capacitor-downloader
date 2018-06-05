@@ -1,0 +1,6 @@
+{
+  "appId": "co.fitcom.capacitor.downloader.demo",
+  "appName": "DownloaderDemo",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}

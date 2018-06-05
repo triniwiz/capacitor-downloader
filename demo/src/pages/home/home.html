@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <p>
+    <span>File Download Speed </span>
+    <span>{{fileSpeed + ' bytes/s'}}</span>
+  </p>
+
+  <p>
+    <span>Image Download Speed </span>
+    <span>{{imageSpeed + ' bytes/s'}}</span>
+  </p>
+
+  <div class="progress-box">
+    <span>File Progress {{fileProgress}}</span>
+
+    <div class="progress">
+      <div class="bar" #fProgress>{{fileProgress}}</div>
+    </div>
+  </div>
+  <div class="progress-box">
+    <span>Image Progress {{imageProgress}}</span>
+
+    <div class="progress">
+      <div class="bar" #iProgress>{{imageProgress}}</div>
+    </div>
+  </div>
+  <img height="40%" [src]="image" />
+  <button (click)="generateDownloads()" ion-button>Generate Downloads</button>
+  <button (click)="generateAndStart()" ion-button>Generate and Start Downloads</button>
+  <button (click)="downloadFile(fProgress)" ion-button>Download Test File</button>
+  <button (click)="pauseFile()" ion-button>Pause Test File</button>
+  <button (click)="resumeFile()" ion-button>Resume Test File</button>
+  <button (click)="downloadImage(iProgress)" ion-button>Download Image</button>
+
+
+</ion-content>
