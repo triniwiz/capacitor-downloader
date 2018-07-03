@@ -14,6 +14,10 @@ export interface IDownloader {
   getStatus(options: Options): Promise<IStatusCode>;
 }
 
+export interface  TimeOutOptions {
+    timeout: number;
+}
+
 export interface Options {
   id: string;
 }

@@ -1,25 +1,11 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
-    - AFNetworking/NSURLSession
+  - Alamofire (4.7.2)
   - Capacitor (1.0.0-alpha.37):
     - CapacitorCordova (= 1.0.0-alpha.37)
     - GCDWebServer (~> 3.0)
   - CapacitorCordova (1.0.0-alpha.37)
-  - CapacitorDownloader (0.0.2):
-    - AFNetworking
+  - CapacitorDownloader (0.0.9):
+    - Alamofire (~> 4.7)
     - Capacitor
   - GCDWebServer (3.4.2):
     - GCDWebServer/Core (= 3.4.2)
@@ -32,7 +18,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - AFNetworking
+    - Alamofire
     - GCDWebServer
 
 EXTERNAL SOURCES:
@@ -44,10 +30,10 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/capacitor-downloader"
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Capacitor: ce8af0f1eae98be282b4bb5ece2070ed380be299
   CapacitorCordova: 649a44b6c61dd977b866de75adb667ac846f65b9
-  CapacitorDownloader: 6970e9cb1381532a9190205b90428a97099615b0
+  CapacitorDownloader: cf4993cfd01d37c2b2a3fd0604f8ae661545bda1
   GCDWebServer: 8d67ee9f634b4bb91eb4b8aee440318a5fc6debd
 
 PODFILE CHECKSUM: c6b10443c1f4ee7ff166a976a3363f6681ef16f9

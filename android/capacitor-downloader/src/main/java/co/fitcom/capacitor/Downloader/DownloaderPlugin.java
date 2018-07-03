@@ -87,7 +87,7 @@ class DownloadData {
 public class DownloaderPlugin extends Plugin {
     private Map<String, DownloadData> downloadsData;
     private Map<String, Request> downloadsRequest;
-
+    private static int timeout = 60;
     class Listener extends DownloadListenerUI {
 
         @Override
@@ -143,6 +143,12 @@ public class DownloaderPlugin extends Plugin {
     }
 
     @PluginMethod()
+    public static void setTimeout(PluginCall call){
+        timeout = call.getInt("timeout",60);
+        call.resolve();
+    }
+
+    @PluginMethod()
     public void initialize(PluginCall call) {
         Manager.init(this.getContext());
     }
@@ -156,6 +162,7 @@ public class DownloaderPlugin extends Plugin {
         String path = call.getString("path");
         String fileName = call.getString("fileName");
         Request request = new Request(url);
+        request.setTimeout(timeout);
         DownloadData data = new DownloadData();
         if (query != null) {
             // TODO

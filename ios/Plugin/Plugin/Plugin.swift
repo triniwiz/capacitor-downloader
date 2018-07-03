@@ -1,12 +1,9 @@
 import Foundation
 import Capacitor
-import AFNetworking
 import CoreLocation
 import UIKit
-/**
- * Please read the Capacitor iOS Plugin Development Guide
- * here: https://capacitor.ionicframework.com/docs/plugins/ios
- */
+import Alamofire
+
 
 protocol DownloadData {
     var status: String {get set}
@@ -27,9 +24,21 @@ typealias JSObject = [String:Any]
 typealias JSArray = [JSObject]
 @objc(DownloaderPlugin)
 public class DownloaderPlugin: CAPPlugin {
-    static var downloads:[String:URLSessionDownloadTask] = [:]
+    static var downloads:[String:DownloadRequest] = [:]
     static var downloadsData:[String:[String:Any]] = [:]
-    @objc func initialize(){}
+
+    @objc func initialize(){
+        Alamofire.SessionManager.default.startRequestsImmediately = false;
+        Alamofire.SessionManager.default.session.configuration.timeoutIntervalForRequest = 60
+        Alamofire.SessionManager.default.session.configuration.timeoutIntervalForResource = 60
+    }
+
+    @objc static func setTimeout(_ call: CAPPluginCall){
+        let timeout = call.getInt("timeout") ?? 60
+        Alamofire.SessionManager.default.session.configuration.timeoutIntervalForRequest = Double(timeout)
+        Alamofire.SessionManager.default.session.configuration.timeoutIntervalForResource = Double(timeout)
+        call.resolve()
+    }
 
     public override func load() {
         self.initialize()
@@ -54,7 +63,7 @@ public class DownloaderPlugin: CAPPlugin {
         let path = call.getString("path") ?? nil
         let fileName = call.getString("fileName") ?? nil
         var fullPath = ""
-        let tempDir = NSURL.fileURL(withPath:NSTemporaryDirectory(),isDirectory:true)
+        let tempDir = FileManager.default.temporaryDirectory
         if (path != nil && fileName != nil) {
             fullPath =  joinPath(left:path ?? "",right: fileName ?? "");
         } else if (path == nil && fileName != nil) {
@@ -64,84 +73,83 @@ public class DownloaderPlugin: CAPPlugin {
         } else {
             fullPath = joinPath(left:tempDir.path, right:self.generateId());
         }
-        let configuration = URLSessionConfiguration.default;
-        let download = AFURLSessionManager.init(sessionConfiguration: configuration)
-        let link = NSURL.init(string:url ?? "")
-        let request  = NSURLRequest.init(url: link!.absoluteURL!)
+
+
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            let fileURL = URL(string: fullPath)
+            return (fileURL!, [.removePreviousFile, .createIntermediateDirectories])
+        }
+
         let id = self.generateId()
-        var task:URLSessionDownloadTask?
+
+        let download = Alamofire.download(url!, to: destination)
+        var task:DownloadRequest?
         var lastRefreshTime = 0;
         var lastBytesWritten =  Int64(0);
-        task =  download.downloadTask(with: request  as URLRequest, progress: { (progress) in
-            var data = JSObject()
-            DispatchQueue.main.async {
-                if(task != nil && task?.state == URLSessionTask.State.running){
-                    let currentBytes = task?.countOfBytesReceived
-                    let totalBytes = progress.totalUnitCount
-                    let currentTime = Int(Date().timeIntervalSince1970 * 1000)
-                    let minTime = 100
-                    var speed = Int64(0)
-                    if (
-                        currentTime - lastRefreshTime >= minTime ||
-                            currentBytes == totalBytes
-                        ) {
-                        var intervalTime = currentTime - lastRefreshTime;
-                        if (intervalTime == 0) {
-                            intervalTime += 1;
-                        }
-                        let updateBytes = Int(currentBytes ?? Int64(0) - lastBytesWritten);
-                        speed = Int64(round(Double(updateBytes / intervalTime)));
-
-                        data["value"] = round(progress.fractionCompleted * 100)
-                        data["currentSize"] = currentBytes ?? 0
-                        data["totalSize"] = totalBytes
-                        data["speed"] = speed;
-                        let d = DownloaderPlugin.downloadsData[id]
-                        let callId = d!["call"] as! String
-                        let _call = self.bridge.getSavedCall(callId)
-                        _call?.success(data)
-                        lastRefreshTime = Int(Date().timeIntervalSince1970 * 1000)
-                        lastBytesWritten = currentBytes ?? Int64(0);
-
-                    }
-
-
-                }else if(task != nil && task?.state == URLSessionTask.State.suspended){
-
-                }
-
-            }
-        }, destination: { (url ,urlResponse) -> URL in
-            return NSURL.fileURL(withPath:fullPath)
-        }) { (response, url, error) in
-            if(error != nil){
-                let d = DownloaderPlugin.downloadsData[id]
-                let callId = d!["call"] as! String
-                let _call = self.bridge.getSavedCall(callId)
-                _call?.error(error?.localizedDescription ?? "")
-            }else{
+        download.downloadProgress{ progress in // called on main queue by default
+            if(!progress.isFinished || !progress.isPaused){
+                var data = JSObject()
+                let currentBytes = progress.completedUnitCount
+                let totalBytes = progress.totalUnitCount
+                let currentTime = Int(Date().timeIntervalSince1970 * 1000)
+                let minTime = 100
+                var speed = Int64(0)
                 if (
-                    task != nil &&
-                        task?.state == URLSessionTask.State.completed &&
-                        task?.error == nil
-                    ){
+                    currentTime - lastRefreshTime >= minTime ||
+                        currentBytes == totalBytes
+                    ) {
+                    var intervalTime = currentTime - lastRefreshTime;
+                    if (intervalTime == 0) {
+                        intervalTime += 1;
+                    }
+                    let updateBytes = Int(currentBytes);
+                    speed = Int64(round(Double(updateBytes / intervalTime)));
+
+                    data["value"] = round(progress.fractionCompleted * 100)
+                    data["currentSize"] = currentBytes
+                    data["totalSize"] = totalBytes
+                    data["speed"] = speed;
+                    let d = DownloaderPlugin.downloadsData[id]
+                    let callId = d!["call"] as! String
+                    let _call = self.bridge.getSavedCall(callId)
+                    _call?.success(data)
+                    lastRefreshTime = Int(Date().timeIntervalSince1970 * 1000)
+                    lastBytesWritten = currentBytes ;
+                }
+            }
+        }
+
+        download
+            .validate()
+            .responseData(completionHandler: { (response) in
+                switch response.result {
+                case .success( _):
                     let d = DownloaderPlugin.downloadsData[id]
                     let callId = d!["call"] as! String
                     let _call = self.bridge.getSavedCall(callId)
                     var data = JSObject()
                     data["status"] = StatusCode.COMPLETED.rawValue
-                    data["path"] = CAPFileManager.getPortablePath(uri: NSURL.fileURL(withPath:fullPath))
+                    data["path"] = CAPFileManager.getPortablePath(uri: response.destinationURL)
                     _call?.success(data)
+                    break;
+                case .failure(let error):
+                    let d = DownloaderPlugin.downloadsData[id]
+                    let callId = d!["call"] as! String
+                    let _call = self.bridge.getSavedCall(callId)
+                    _call?.error(error.localizedDescription)
+                    break;
                 }
-            }
+            })
 
-        }
+        task = download
+
         DownloaderPlugin.downloads[id] = task
         var obj = JSObject()
         obj["value"] = id
         call.resolve(obj)
     }
     @objc func start(_ call: CAPPluginCall){
+
         let id = call.getString("id") ?? nil
         if(id == nil){
             call.reject("Invalid id")
@@ -153,6 +161,7 @@ public class DownloaderPlugin: CAPPlugin {
         object["path"] = nil
         DownloaderPlugin.downloadsData[id ?? ""] = object
         let task = DownloaderPlugin.downloads[id ?? ""]
+
         task?.resume()
     }
     @objc func pause(_ call: CAPPluginCall){

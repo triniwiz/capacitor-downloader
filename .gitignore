@@ -3,3 +3,4 @@ node_modules
 dist
 ios/Plugin/Pods/
 demo/android/app/src/main/assets
+.idea

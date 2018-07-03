@@ -17,7 +17,6 @@
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/src/main/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/src/main/assets" />
         <option name="PROJECT_TYPE" value="1" />
       </configuration>
@@ -44,31 +43,17 @@
       <sourceFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/generated/res/rs/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/generated/res/resValues/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/generated/source/apt/test/debug" isTestSource="true" generated="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/attr" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/check-manifest" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/classes" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/extractedTypedefs" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/incremental" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/intermediate-jars" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/javaPrecompile" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/jniLibs" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/library_and_local_jars_jni" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/packaged-aidl" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/packaged-classes" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/packagedAssets" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/packaged_res" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/public_res" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/publish-proguard" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/rs" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/symbols" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/build/tmp" />
     </content>
     <content url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/src/androidTest/aidl">
       <sourceFolder url="file://$MODULE_DIR$/../../demo/node_modules/capacitor-downloader/android/capacitor-downloader/src/androidTest/aidl" isTestSource="true" />
@@ -219,19 +204,19 @@
     <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.14.0@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.support.test:rules-1.0.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: javax.inject:javax.inject:1@jar" level="project" />
+    <orderEntry type="library" name="Gradle: ionic-team:capacitor-android-1.0.0-beta.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment-27.1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12@jar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.core:runtime-1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3@jar" level="project" />
+    <orderEntry type="library" name="Gradle: co.fitcom:fancydownloader-0.6.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:design-27.1.1" level="project" />
-    <orderEntry type="library" name="Gradle: co.fitcom:fancydownloader-0.5.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7-27.1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.support.test.espresso:espresso-idling-resource-3.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.10.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:livedata-core-1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-library:1.3@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-integration:1.3@jar" level="project" />
-    <orderEntry type="library" name="Gradle: ionic-team:capacitor-android-1.0.0-alpha.38" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.core:common:1.1.0@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: net.sf.kxml:kxml2:2.3.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime-1.1.0" level="project" />
