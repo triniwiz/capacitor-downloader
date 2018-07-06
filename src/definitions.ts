@@ -10,6 +10,7 @@ export interface IDownloader {
   start(options: Options, progress?: Function): Promise<any>;
   pause(options: Options): Promise<any>;
   resume(options: Options): Promise<any>;
+  cancel(options:Options): Promise<any>;
   getPath(options: Options): Promise<string>;
   getStatus(options: Options): Promise<IStatusCode>;
 }

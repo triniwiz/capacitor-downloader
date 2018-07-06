@@ -24,6 +24,10 @@ export class Downloader implements IDownloader {
     return DownloaderPlugin.createDownload(options);
   }
 
+  cancel(options:Options){
+    return DownloaderPlugin.cancel(options);
+  }
+
   start(options: Options, progress?: Function): Promise<DownloadEventData> {
     return new Promise(async (resolve, reject) => {
       DownloaderPlugin.start(options, (data: any, error: string) => {
