@@ -1,6 +1,6 @@
 {
   "name": "capacitor-downloader",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
