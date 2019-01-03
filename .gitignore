@@ -1,6 +1,6 @@
 node_modules
 .DS_Store
 dist
-ios/Plugin/Pods/
+ios/Plugin/Pods
 demo/android/app/src/main/assets
 .idea

@@ -1,7 +1,7 @@
 
   Pod::Spec.new do |s|
     s.name = 'CapacitorDownloader'
-    s.version = '1.1.0'
+    s.version = '1.1.4'
     s.summary = 'Downloader'
     s.license = 'MIT'
     s.homepage = 'https://github.com/triniwiz/capacitor-downloader'
