@@ -129,7 +129,7 @@ public class DownloaderPlugin: CAPPlugin {
                     let _call = self.bridge.getSavedCall(callId)
                     var data = JSObject()
                     data["status"] = StatusCode.COMPLETED.rawValue
-                    data["path"] = CAPFileManager.getPortablePath(uri: response.destinationURL)
+                    data["path"] = CAPFileManager.getPortablePath(host: self.bridge.getLocalUrl(), uri: response.destinationURL)
                     _call?.success(data)
                     break;
                 case .failure(let error):

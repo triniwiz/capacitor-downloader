@@ -111,7 +111,7 @@ public class DownloaderPlugin extends Plugin {
             if (data != null) {
                 JSObject object = new JSObject();
                 object.put("status", StatusCode.COMPLETED);
-                String path = FileUtils.getPortablePath(getContext(), Uri.fromFile(new File(request.getFilePath(), request.getFileName())));
+                String path = FileUtils.getPortablePath(getContext(), bridge.getLocalUrl(), Uri.fromFile(new File(request.getFilePath(), request.getFileName())));
                 object.put("path", path);
                 data.getCallback().success(object);
                 downloadsData.remove(task);
