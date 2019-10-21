@@ -8,10 +8,32 @@
 
 * `npm i capacitor-downloader`
 
+### Android
+
+Add `import co.fitcom.capacitor.Downloader.DownloaderPlugin;` and `add(DownloaderPlugin.class);` in the app's `MainActivity.java` like this:
+
+```
+import co.fitcom.capacitor.Downloader.DownloaderPlugin;
+
+public class MainActivity extends BridgeActivity {
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    // Initializes the Bridge
+    this.init(savedInstanceState, new ArrayList<Class<? extends Plugin>>() {{
+      // Additional plugins you've installed go here
+      // Ex: add(TotallyAwesomePlugin.class);
+      add(DownloaderPlugin.class);
+    }});
+  }
+}
+```
+
 ## Usage
 
 ```ts
-import { Downloader } from 'capacitor-downloader';
+import { Downloader, DownloadEventData, ProgressEventData } from 'capacitor-downloader';
 const downloader = new Downloader();
 const data = await downloader.createDownload({
   url:
