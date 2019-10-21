@@ -76,8 +76,8 @@ public class DownloaderPlugin: CAPPlugin {
         
         
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-            let fileURL = URL(string: fullPath)
-            return (fileURL!, [.removePreviousFile, .createIntermediateDirectories])
+            let fileURL = URL(fileURLWithPath: fullPath)
+            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
         
         let id = self.generateId()
